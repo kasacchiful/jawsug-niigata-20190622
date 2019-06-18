@@ -434,7 +434,7 @@ EC2インスタンスからRDSに対してリストアします。
         - 本ハンズオンの例では「pw_wordpress」
     - 画面上にはパスワード文字列は表示されません。
     ```bash
-    mysql> show database;
+    mysql> show databases;
     ```
     - database一覧が表示され、その中に「db_wordpress」があることを確認。
     ```bash
