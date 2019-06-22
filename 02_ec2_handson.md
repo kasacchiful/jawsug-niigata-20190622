@@ -421,10 +421,11 @@ WordPressが起動しているEC2インスタンスの中にある
 DBのバックアップファイルを取得し、
 EC2インスタンスからRDSに対してリストアします。
 
-1. EC2インスタンスにSSHでログインします。
+1. EC2インスタンスにセッションマネージャーでログインします。
 2. 以下のコマンドを実行して、EC2からRDSへ接続できることを確認します。
     ```bash
-    mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞
+    cd ~
+    sudo mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞
     ```
     - `Enter password:`と表示されたら、RDSで設定したパスワードを入力します。
         - 本ハンズオンの例では「pw_wordpress」
@@ -438,20 +439,21 @@ EC2インスタンスからRDSに対してリストアします。
     ```
 3. 以下のコマンドを実行して、DBバックアップファイルを作成します。
     ```bash
-    mysqldump -u root -p bitnami_wordpress > backup.sql
+    sudo mysqldump -u root -p bitnami_wordpress > backup.sql
     ```
-4. `Enter password:`と表示されたら、bitnamiの管理画面アクセスで調べたパスワード文字列を入力します。
+4. `Enter password:`と表示されたら、bitnamiの管理画面アクセスで調べたパスワード文字列
+    (bitnami_credentialsに書かれているランダムな文字列) を入力します。
     - 画面上にはパスワード文字列は表示されません。
 5. 以下のコマンドを実行して、RDSにリストアします。
     ```bash
-    mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞ db_wordpress < backup.sql
+    sudo mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞ db_wordpress < backup.sql
     ```
 6. `Enter password:`と表示されたら、RDSで設定したパスワードを入力します。
     - 本ハンズオンの例では「pw_wordpress」
     - 画面上にはパスワード文字列は表示されません。
 7. 以下のコマンドを実行して、RDSにデータがリストアされたことを確認します。
     ```bash
-    mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞ db_wordpress
+    sudo mysql -u user_wordpress -p -h ＜RDSエンドポイント文字列＞ db_wordpress
     ```
     - `Enter password:`と表示されたら、RDSで設定したパスワードを入力します。
         - 本ハンズオンの例では「pw_wordpress」
